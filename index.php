@@ -3,6 +3,7 @@ require_once("include/fct.inc.php");
 require_once ("include/class.pdogsb.inc.php");
 include("vues/v_entete.php") ;
 session_start();
+//Correction
 $pdo = PdoGsb::getPdoGsb();
 $estConnecte = estConnecte();
 if(!isset($_REQUEST['uc']) || !$estConnecte){
@@ -21,4 +22,3 @@ switch($uc){
 	}
 }
 include("vues/v_pied.php") ;
-?>
