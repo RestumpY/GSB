@@ -339,7 +339,7 @@ class PdoGsb
 		PdoGsb::$monPdo->exec($req);
 	}
 	/**
-	 * Recupere le montantTotal avec l'idVisiteurs dans le mois indiqué
+	 * Recupere le montantTotalFraisForfait avec l'idVisiteurs dans le mois indiqué
 	 * @param type $idVisiteur
 	 * @param type $mois sous la forme aaaamm
 	 * @return type $LaLigne
@@ -354,6 +354,12 @@ class PdoGsb
 		return $laLigne;
 	}
 
+	/**
+	 * Recupere le montantTotalFraisHorsForfait avec l'idVisiteurs dans le mois indiqué
+	 * @param type $idVisiteur
+	 * @param type $mois sous la forme aaaamm
+	 * @return type $LaLigne
+	 */
 	public function getMontantTotalFraisHorsForfait($idVisiteur, $mois)
 	{
 		$req = "SELECT SUM(montant) as 'montant' FROM lignefraishorsforfait WHERE mois = $mois and idVisiteur = '$idVisiteur'";
