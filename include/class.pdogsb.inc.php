@@ -344,15 +344,26 @@ class PdoGsb
 	 * @param type $mois sous la forme aaaamm
 	 * @return type $LaLigne
 	 */
-	public function getMontantTotal($idVisiteur, $mois)
+	public function getMontantTotalFraisForfait($idVisiteur, $mois)
 	{
-		$req = "SELECT SUM(fraisforfait.montant*lignefraisforfait.quantite) as montant
+		$req = "SELECT SUM(fraisforfait.montant*lignefraisforfait.quantite) as 'montant'
                 from fraisforfait join lignefraisforfait on fraisforfait.id = lignefraisforfait.idFraisForfait
                  where idVisiteur ='$idVisiteur' and mois ='$mois'";
-		$res = PdoGsb::$monPdo->exec($req);
+		$res = PdoGsb::$monPdo->query($req);
 		$laLigne = $res->fetch();
 		return $laLigne;
 	}
+
+	public function getMontantTotalFraisHorsForfait($idVisiteur, $mois)
+	{
+		$req = "SELECT SUM(montant) as 'montant' FROM lignefraishorsforfait WHERE mois = $mois and idVisiteur = '$idVisiteur'";
+
+		$res = PdoGsb::$monPdo->query($req);
+		$laLigne = $res->fetch();
+		return $laLigne;
+	}
+
+
 	/**
 	 * Modifie le montant de l'id visiteurs dans le mois indiqué
 	 * @param type $idVisiteur
